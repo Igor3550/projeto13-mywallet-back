@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
+  if(!email || !password) return res.sendStatus(401)
   try {
     const user = await db.collection('users').findOne({email});
     if(user && bcrypt.compareSync(password, user.password)){
