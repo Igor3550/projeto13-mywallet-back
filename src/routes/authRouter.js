@@ -4,7 +4,6 @@ import validateUserInput from '../middlewares/authMiddleware.js'
 const router = express.Router();
 
 router.post('/', signIn);
-router.use(validateUserInput)
-router.post('/sign-up', signUp)
+router.post('/sign-up', validateUserInput, signUp);
 
 export default router;
