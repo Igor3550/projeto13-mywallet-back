@@ -10,7 +10,8 @@ const signIn = async (req, res) => {
     if(user && bcrypt.compareSync(password, user.password)){
       const token = uuid()
       await db.collection('sessions').insertOne({token, userId: user._id})
-      res.send(token);
+      delete user.password;
+      res.send({...user, token});
     }else{
       return res.sendStatus(401)
     }
